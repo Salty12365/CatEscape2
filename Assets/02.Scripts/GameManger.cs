@@ -9,23 +9,28 @@ public class GameManger : MonoBehaviour
     GameObject hpGauge;
     public GameObject gameOver_Text;
 
+    public float myHP;
+    public float fullHP = 100;
+
 
     void Start()
     {
+        myHP = fullHP;
         hpGauge = GameObject.Find("hpGauge");
     }
 
     public void HurtHP()
     {
-        hpGauge.GetComponent<Image>().fillAmount -= 0.2f;
+        myHP -= 20;
 
-        if(hpGauge.GetComponent<Image>().fillAmount <= 0)
+        hpGauge.GetComponent<Image>().fillAmount = myHP/fullHP;
+
+        Debug.Log("ÇöÀç FillAmpopund °ª : " + hpGauge.GetComponent<Image>().fillAmount);
+
+        if (myHP <= 0)
         {
             gameOver_Text.SetActive(true);
             Time.timeScale = 0f;
         }
-        
     }
-
-
 }
